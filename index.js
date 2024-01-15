@@ -25,11 +25,13 @@ client.addListener(Events.MessageCreate, async message => {
                     name = name.substring(0, 32 - prefix.length);
                 }
                 await message.member.setNickname(`Mochi ${name}`);
+                console.log("CHANGED");
             }
     
             if (!message.member.roles.cache.has(roleId)) {
                 console.log("Role needs to be added");
-                message.member.roles.add(roleId);
+                await message.member.roles.add(roleId);
+                console.log("ADDED");
             }
         }
     } catch (e) {
