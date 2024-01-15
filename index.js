@@ -8,14 +8,14 @@ const client = new Client({
 });
 
 const token = process.env.BOT_TOKEN;
-const channelId = process.env.CHANNEL_ID;
+const channelId = process.env.CHANNEL_ID.split(" ");
 const roleId = process.env.ROLE_ID;
 const prefix = process.env.PREFIX.trim() + " ";
 const prefix_lowercase = prefix.trim().toLowerCase();
 
 client.addListener(Events.MessageCreate, async message => {
 	try {
-        if (message.channelId === channelId) {
+        if (channelId.indexOf(message.channelId) > -1) {
             // see if the user needs their name adjusted
             if (message.member.displayName && !message.member.displayName.toLowerCase().startsWith(prefix_lowercase)) {
                 console.log("Name needs to be changed");
